@@ -1,36 +1,7 @@
 /*
-  Row-Column Scanning an 8x8 LED matrix with X-Y input
+  Arduino-Cade
 
- This example controls an 8x8 LED matrix using two analog inputs
-
- created 27 May 2009
- modified 30 Aug 2011
- by Tom Igoe
-
- This example works for the Lumex  LDM-24488NI Matrix. See
- http://sigma.octopart.com/140413/datasheet/Lumex-LDM-24488NI.pdf
- for the pin connections
-
- For other LED cathode column matrixes, you should only need to change
- the pin numbers in the row[] and column[] arrays
-
- rows are the anodes
- cols are the cathodes
- ---------
-
- Pin numbers:
- Matrix:
- * Digital pins 2 through 13,
- * analog pins 2 through 5 used as digital 16 through 19
- Potentiometers:
- * center pins are attached to analog pins 0 and 1, respectively
- * side pins attached to +5V and ground, respectively.
-
- This example code is in the public domain.
-
- http://www.arduino.cc/en/Tutorial/RowColumnScanning
-
- see also http://www.tigoe.net/pcomp/code/category/arduinowiring/514 for more
+  An arduino-based pixel-stacking game using an 8x8 LED matrix.
  */
 
 
@@ -48,8 +19,14 @@ const int col[8] = {
 int pixels[8][8];
 
 // cursor position:
-int x = 5;
-int y = 5;
+int x = 2;
+int y = 0;
+
+//starting length of platform
+int len = 4;
+int height = 0;
+int velocity = 50;
+
 
 void setup() {
   // initialize the I/O pins as outputs
@@ -80,14 +57,6 @@ void loop() {
 }
 
 void readSensors() {
-  // turn off the last position:
-  pixels[x][y] = HIGH;
-  // read the sensors for X and Y values:
-  x = 7 - map(analogRead(A0), 0, 1023, 0, 7);
-  y = map(analogRead(A1), 0, 1023, 0, 7);
-  // set the new pixel position low so that the LED will turn on
-  // in the next screen refresh:
-  pixels[x][y] = LOW;
 
 }
 
